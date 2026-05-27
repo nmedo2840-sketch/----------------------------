@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Build Your Box | FRUZO</title>
+<title>FRUZO | Luxury Viral Box</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 
@@ -13,7 +13,7 @@
 body{
 margin:0;
 font-family:'Cairo',sans-serif;
-background:#0b0b0b;
+background:#070707;
 color:white;
 overflow-x:hidden;
 }
@@ -33,17 +33,18 @@ radial-gradient(circle at bottom,#00ffd533,transparent 40%);
 }
 
 .hero h1{
-font-size:55px;
+font-size:60px;
 margin:0;
 }
 
 .hero p{
 opacity:.7;
+margin-top:10px;
 }
 
 .btn{
 margin-top:20px;
-padding:15px 30px;
+padding:15px 35px;
 border:none;
 border-radius:50px;
 background:linear-gradient(45deg,#ff5f7e,#ff9966);
@@ -52,7 +53,7 @@ font-weight:900;
 cursor:pointer;
 }
 
-/* LAYOUT */
+/* STORE */
 
 .container{
 display:grid;
@@ -64,7 +65,7 @@ padding:30px;
 /* PRODUCTS */
 
 .card{
-background:#161616;
+background:#151515;
 padding:15px;
 border-radius:20px;
 margin-bottom:10px;
@@ -73,6 +74,13 @@ transition:.3s;
 
 .card:hover{
 transform:scale(1.02);
+}
+
+.card img{
+width:100%;
+border-radius:15px;
+height:140px;
+object-fit:cover;
 }
 
 .card button{
@@ -88,44 +96,15 @@ cursor:pointer;
 
 /* BOX */
 
-.stage{
-perspective:1200px;
-height:520px;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
 .box{
 width:320px;
 height:320px;
-position:relative;
+background:#111;
 border-radius:25px;
-background:linear-gradient(145deg,#2a2a2a,#111);
-box-shadow:0 30px 60px rgba(0,0,0,.6);
+position:relative;
 overflow:hidden;
-transform:rotateX(12deg) rotateY(12deg);
-transition:.8s;
+box-shadow:0 30px 60px rgba(0,0,0,.6);
 }
-
-/* LID */
-
-.lid{
-position:absolute;
-top:0;
-width:100%;
-height:100%;
-background:#333;
-transition:.8s;
-transform-origin:top;
-z-index:3;
-}
-
-.box.open .lid{
-transform:rotateX(150deg);
-}
-
-/* INSIDE */
 
 .inside{
 position:absolute;
@@ -145,14 +124,13 @@ height:45px;
 object-fit:contain;
 }
 
-/* WRAP */
-
 .wrap{
 position:absolute;
 inset:0;
-z-index:4;
 opacity:.85;
 }
+
+/* CART */
 
 .cart{
 margin-top:10px;
@@ -178,33 +156,39 @@ cursor:pointer;
 
 <body>
 
-<!-- HERO -->
+<!-- HERO (VIRAL PART) -->
 <div class="hero">
-<h1>🍓 Build Your Luxury Box</h1>
-<p>اصنع بوكسك بنفسك وشوفه قدامك قبل ما تطلبه</p>
+
+<h1>🍓 اصنع بوكسك الفاخر</h1>
+<p>Luxury Experience — Viral Design — Premium Delivery</p>
+
 <button class="btn" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
 ابدأ التصميم
 </button>
+
 </div>
 
-<!-- SHOP -->
+<!-- STORE -->
 <div class="container" id="shop">
 
 <!-- LEFT -->
 <div>
 
 <div class="card">
-<h3>🍓 فراولة</h3>
+<img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6">
+<h3>فراولة</h3>
 <button onclick="add('https://pngimg.com/d/strawberry_PNG2593.png',45)">إضافة</button>
 </div>
 
 <div class="card">
-<h3>🥭 مانجو</h3>
+<img src="https://images.unsplash.com/photo-1553279768-865429fa0078">
+<h3>مانجو</h3>
 <button onclick="add('https://pngimg.com/d/mango_PNG9168.png',55)">إضافة</button>
 </div>
 
 <div class="card">
-<h3>🍇 عنب</h3>
+<img src="https://images.unsplash.com/photo-1536511132770-e5058c7e8c46">
+<h3>عنب</h3>
 <button onclick="add('https://pngimg.com/d/grape_PNG2993.png',60)">إضافة</button>
 </div>
 
@@ -218,11 +202,7 @@ cursor:pointer;
 <!-- RIGHT -->
 <div>
 
-<div class="stage">
-
-<div class="box" id="box">
-
-<div class="lid"></div>
+<div class="box">
 
 <div class="inside" id="inside"></div>
 
@@ -230,10 +210,8 @@ cursor:pointer;
 
 </div>
 
-</div>
-
 <div class="cart">
-💰 الإجمالي: <span id="total">0</span> جنيه
+💰 الإجمالي: <span id="total">0</span>
 </div>
 
 <button class="checkout" onclick="order()">
@@ -246,42 +224,40 @@ cursor:pointer;
 
 <script>
 
-let total = 0;
+let total=0;
 
 function add(img,price){
 
-let f = document.createElement("img");
-f.src = img;
+let el=document.createElement("img");
+el.src=img;
 
-document.getElementById("inside").appendChild(f);
+document.getElementById("inside").appendChild(el);
 
-total += price;
+total+=price;
 update();
-
-document.getElementById("box").classList.add("open");
 }
 
 function wrap(){
-
 document.getElementById("wrapImg").src =
 "https://pngimg.com/d/gift_PNG5953.png";
 
-total += 120;
+total+=120;
 update();
 }
 
 function update(){
-document.getElementById("total").innerText = total;
+document.getElementById("total").innerText=total;
 }
 
 function order(){
 
-let msg = "🛒 طلب جديد من Build Your Box:%0A";
-msg += "الإجمالي: " + total + " جنيه";
+let msg="🛒 طلب FRUZO:%0A";
+msg+=`الإجمالي: ${total} جنيه`;
 
-let phone = "201279468804";
-
-window.open(`https://wa.me/${phone}?text=${msg}`, "_blank");
+window.open(
+`https://wa.me/201279468804?text=${msg}`,
+"_blank"
+);
 }
 
 </script>
